@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Class 8 Biology Quiz</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            background: #eef7f1;
+            padding: 20px;
+        }
+
+        .quiz {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+        }
+
+        button {
+            display: block;
+            width: 90%;
+            margin: 10px auto;
+            padding: 12px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+
+        #result {
+            font-size: 22px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="quiz">
+
+    <h1>🧬 Class 8 Biology Quiz</h1>
+
+    <h2 id="question"></h2>
+
+    <div id="answers"></div>
+
+    <p id="score">Score: 0 / 5</p>
+
+    <p id="result"></p>
+
+</div>
+
+<script>
+
+const questions = [
+    {
+        question: "Which part of the cell controls its activities?",
+        answers: ["Cytoplasm", "Nucleus", "Vacuole", "Cell wall"],
+        correct: "Nucleus"
+    },
+
+    {
+        question: "Which substance in red blood cells carries oxygen?",
+        answers: ["Chlorophyll", "Haemoglobin", "Plasma", "Insulin"],
+        correct: "Haemoglobin"
+    },
+
+    {
+        question: "What is the loss of water from leaves called?",
+        answers: ["Respiration", "Photosynthesis", "Transpiration", "Digestion"],
+        correct: "Transpiration"
+    },
+
+    {
+        question: "Which microorganism helps turn milk into curd?",
+        answers: ["Yeast", "Lactobacillus", "Amoeba", "Virus"],
+        correct: "Lactobacillus"
+    },
+
+    {
+        question: "Why does the small intestine have villi?",
+        answers: [
+            "To store food",
+            "To produce bile",
+            "To increase nutrient absorption",
+            "To remove waste"
+        ],
+        correct: "To increase nutrient absorption"
+    }
+];
+
+let currentQuestion = 0;
+let score = 0;
+
+function showQuestion() {
+
+    document.getElementById("question").textContent =
+        questions[currentQuestion].question;
+
+    const answersDiv = document.getElementById("answers");
+    answersDiv.innerHTML = "";
+
+    questions[currentQuestion].answers.forEach(answer => {
+
+        const button = document.createElement("button");
+
+        button.textContent = answer;
+
+        button.onclick = function() {
+            checkAnswer(answer);
+        };
+
+        answersDiv.appendChild(button);
+    });
+}
+
+function checkAnswer(answer) {
+
+    if (answer === questions[currentQuestion].correct) {
+        score++;
+    }
+
+    currentQuestion++;
+
+    document.getElementById("score").textContent =
+        "Score: " + score + " / 5";
+
+    if (currentQuestion < questions.length) {
+        showQuestion();
+    } else {
+        document.getElementById("question").textContent =
+            "🎉 Quiz Completed!";
+
+        document.getElementById("answers").innerHTML = "";
+
+        document.getElementById("result").textContent =
+            "🏆 Your Final Score: " + score + " / 5";
+    }
+}
+
+showQuestion();
+
+</script>
+
+</body>
+</html>
